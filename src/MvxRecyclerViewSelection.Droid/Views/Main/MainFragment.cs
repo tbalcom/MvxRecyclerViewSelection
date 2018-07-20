@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-using MvxRecyclerViewSelection.Core.ViewModels.Main;
+using MvvmCross.Platforms.Android.Binding.BindingContext;
 using MvvmCross.Platforms.Android.Presenters.Attributes;
+using MvxRecyclerViewSelection.Core.ViewModels.Main;
+using MvxRecyclerViewSelection.Droid.Adapters;
 
 namespace MvxRecyclerViewSelection.Droid.Views.Main
 {
@@ -18,5 +11,18 @@ namespace MvxRecyclerViewSelection.Droid.Views.Main
     public class MainFragment : BaseFragment<MainViewModel>
     {
         protected override int FragmentLayoutId => Resource.Layout.fragment_main;
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            var view = base.OnCreateView(inflater, container, savedInstanceState);
+
+            var recyclerView = view.FindViewById<MvvmCross.Droid.Support.V7.RecyclerView.MvxRecyclerView>(Resource.Id.planets);
+            if (recyclerView != null)
+            {
+                recyclerView.Adapter = new SingleSelectionRecyclerViewAdapter((IMvxAndroidBindingContext)BindingContext);
+            }
+
+            return view;
+        }
     }
 }
