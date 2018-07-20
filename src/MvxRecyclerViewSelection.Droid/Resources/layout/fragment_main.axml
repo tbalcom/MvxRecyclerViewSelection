@@ -13,5 +13,5 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:MvxItemTemplate="@layout/item_planet"
-        app:MvxBind="ItemsSource Planets; ItemClick SelectCategoryCommand; SelectedItem SelectedCategory" />
+        app:MvxBind="ItemsSource Planets; ItemClick PlanetClickCommand;" />
 </android.support.constraint.ConstraintLayout>
